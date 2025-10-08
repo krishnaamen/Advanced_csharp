@@ -1,0 +1,17 @@
+﻿{
+  "database": {
+    "connectionString": "Server=localhost;Database=TestDB;",
+    "timeout": 30,
+    "provider": "SqlServer"
+  },
+  "logging": {
+    "level": "Information",
+    "file": "logs/app.log",
+    "maxFileSize": "10MB"
+  },
+  "api": {
+    "baseUrl": "https://api.example.com",
+    "timeout": 5000,
+    "retries": 3
+  }
+}
