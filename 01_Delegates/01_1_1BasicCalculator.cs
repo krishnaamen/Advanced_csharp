@@ -6,54 +6,52 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace _01_Delegates;
+
 public class _01_1_1_BasicCalculator
 {
     public delegate double MathOperation(double a, double b);
+
+
 
     public static double Calculate(double x, double y, MathOperation operation)
     {
         return operation(x, y);
     }
 
-    static double Pow(double x, double y) => Math.Pow(x,y);
+  
+    static double Pow(double x, double y) => Math.Pow(x, y);
     static double Add(double x, double y) => x + y;
     static double Sub(double x, double y) => x - y;
     static double Mul(double x, double y) => x * y;
-    static double Div(double x, double y)
-    {
-        return x / y;
-    }
-
-
+    static double Div(double x, double y) => x / y;
 
 
     public static void Run()
     {
 
-        while(true)
+        while (true)
         {
-            var line = Console.ReadLine()?.Trim().ToLower();
-            if(string.IsNullOrEmpty(line) || line == "exit")
+            var input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input) || input == "exit")
             {
                 Console.WriteLine("Goodbye!!!");
                 return;
             }
 
+            var line = input.Trim().ToLower();
+
             var elements = Regex.Split(line, "([-*/+^ ])");
-
-
-            //Console.WriteLine(string.Join(",", elements));
+            Console.WriteLine(string.Join(",", elements));
 
             double? arg1 = null;
             double? arg2 = null;
-            MathOperation op = null;
+            MathOperation? op = null;
+
 
             foreach (var element in elements)
             {
                 if (string.IsNullOrEmpty(element.Trim()))
-                {
                     continue;
-                }
                 if (double.TryParse(element, out var a))
                 {
                     if (arg1 == null)
@@ -65,7 +63,8 @@ public class _01_1_1_BasicCalculator
                         arg2 = a;
                     }
                 }
-                else { 
+                else
+                {
                     switch (element)
                     {
                         case "+": op = Add; break;
@@ -78,19 +77,25 @@ public class _01_1_1_BasicCalculator
                                 Console.WriteLine("Invalid operator");
                                 return;
                             }
-                            break;
                     }
 
-                }
-            }
+                } 
 
-            if (arg1 != null && arg2 != null && op != null) {
-                var result = Calculate(arg1.Value, arg2.Value, op);
-                Console.WriteLine($"Result = {result}");
-            }
-
+                    if (arg1 != null && arg2 != null && op != null)
+                {
+                    var result = Calculate(arg1.Value, arg2.Value, op);
+                    Console.WriteLine($"Result = {result}");
+                }     
+                
+                
+                
+                
+                
+                
+                 }
 
         }
-        //Console.WriteLine($"5 + 7 = {Calculate(5,7, Add)}");
     }
+
+
 }
