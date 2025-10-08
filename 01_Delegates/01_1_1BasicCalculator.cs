@@ -23,8 +23,12 @@ public class _01_1_1_BasicCalculator
     static double Add(double x, double y) => x + y;
     static double Sub(double x, double y) => x - y;
     static double Mul(double x, double y) => x * y;
-    static double Div(double x, double y) => x / y;
-
+    static double Div(double x, double y)
+{
+    if (y == 0)
+        throw new DivideByZeroException("Division by zero is not allowed... Please review and re input the values.");
+    return x / y;
+}
 
     public static void Run()
     {
